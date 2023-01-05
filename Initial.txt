@@ -1,0 +1,5 @@
+npm init -y
+npm install --save mysql express sequelize
+npm install --save-dev nodemon
+package.json("start": "node app.js","dev": "nodemon app.js") in scripts
+npm run dev
