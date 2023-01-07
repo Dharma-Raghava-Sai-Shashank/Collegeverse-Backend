@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 
 const sequelize = new Sequelize("Collegeverse","root","Arjun@9920",{
     dialect : "mysql",
-    host : "https://collegeverse.onrender.com/"
+    host : "localhost"
 })
 
 module.exports = sequelize
