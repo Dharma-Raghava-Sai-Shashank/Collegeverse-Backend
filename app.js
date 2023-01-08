@@ -1,97 +1,25 @@
 const express = require('express')
-const mysql = require('mysql')
-const User=require('./models/users')
-const Post=require('./models/posts')
-const Like=require('./models/likes')
-const Comment=require('./models/comments')
-const e = require('express')
+// const User=require('./models/users')
+// const Post=require('./models/posts')
+// const Like=require('./models/likes')
+// const Comment=require('./models/comments')
 
 const app = express()
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
 
+const Mongoose = require('mongoose')
+Mongoose.set('strictQuery', false);
+const db ='mongodb+srv://saishashank:Arjun@cluster0.fevr2iu.mongodb.net/Collegeverse?retryWrites=true&w=majority'
+Mongoose.connect(db,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+}).then(()=>{
+        console.log("Connected to mongodb database")
+    }).catch((err)=> console.log(err))
+
 app.get('/',async(req,res)=>{
     return res.send("Server Started")
-})
-// Signup :
-app.post('/signup',async(req,res)=>{
-    console.log(req.body)
-    try{
-        var s=await User.create({
-        name: req.body.name,
-        email:req.body.email,
-        password:req.body.password,
-        phone:"",
-        about:"",
-        image:""
-    })}catch(err){
-        return res.send({"success":"false","token":""})
-    }
-    return res.send({"success":"true","token":s.dataValues.userid})
-})
- 
-// Signin :
-app.post('/signin',async(req,res)=>{
-    // var exits=await User.findOne({ 
-    //     where : {email:req.body.email}
-    // })
-    // if(exits&&req.body.password==exits.password)
-    //     return res.send({"success":"true","token":exits.userid})
-    return res.send({"success":"true","token":"123456"})
-})
-
-app.get('/getallpost',async(req,res)=>{
-    let data = await User.findAll({
-        // where : {ispost:1}
-    })
-    return res.send(data)
-})
-
-app.get('/getallquery',async(req,res)=>{
-    let data = await Post.findAll({
-        where : {ispost:0}
-    })
-    return res.send(data)
-})
-
-app.post('/user',async(req,res)=>{
-    console.log(req.body)
-    await User.create({
-        name: req.body.name,
-        email:req.body.email,
-        password:req.body.password,
-        phone:req.body.phone,
-        about:req.body.about,
-        image:req.body.image
-    }).then(res.send({"success":"true"}));               
-})
-
-app.post('/post',async(req,res)=>{
-    console.log(req.body)
-    await Post.create({
-        createrid: req.body.createrid,
-        about:req.body.about,
-        description:req.body.description,
-        image:req.body.image,
-        ispost:req.body.ispost
-    }).then(res.send({"success":"true"}));               
-})
-
-app.post('/like',async(req,res)=>{
-    console.log(req.body)
-    await Like.create({
-        postid: req.body.postid,
-        likerid: req.body.likerid
-    }).then(res.send({"success":"true"}));               
-})
-
-app.post('/comment',async(req,res)=>{
-    console.log(req.body)
-    await Comment.create({
-        postid: req.body.postid,
-        commenterid: req.body.commenterid,
-        comment: req.body.comment
-    }).then(res.send({"success":"true"}));               
 })
 
 app.listen(5000,()=>{
