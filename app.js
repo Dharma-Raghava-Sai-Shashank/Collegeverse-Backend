@@ -24,19 +24,19 @@ app.post('/signup',async(req,res)=>{
     if(!data)
     {
         var u=await user.save()
-        return res.send({success:"true",token:u._id,message:"Signup successfull"})
+        return ({success:"true",token:u._id,message:"Signup successfull"})
     }
-    return res.send({success:"false",token:"",message:"Email already exists"})
+    return ({success:"false",token:"",message:"Email already exists"})
 })
 
 app.post('/signin',async(req,res)=>{
     const {email,password}=req.body
     var data=await User.findOne({email:email})
     if(!data)
-        return res.send({success:"false",token:"",message:"Email does not exists"})
+        return ({success:"false",token:"",message:"Email does not exists"})
     else if(data.password==password) 
-        return res.send({success:"true",token:data._id,message:"Signin succeccfull"})
-    return res.send({success:"false",token:"",message:"Wrong Password"})
+        return ({success:"true",token:data._id,message:"Signin succeccfull"})
+    return ({success:"false",token:"",message:"Wrong Password"})
 })
 
 app.post('/addpost',async(req,res)=>{
