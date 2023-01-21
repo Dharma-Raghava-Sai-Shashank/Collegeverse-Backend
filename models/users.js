@@ -12,7 +12,6 @@ const userSchema = new Mongoose.Schema(
         required:true,
         trim:true,
         lowercase:true,
-        trim:true,
     },
     password: {
       type: String,
@@ -23,6 +22,14 @@ const userSchema = new Mongoose.Schema(
       required:false,
     },
     about: {
+      type: String,
+      required:false,
+    },
+    skills: {
+      type: String,
+      required:false,
+    },
+    techstack: {
       type: String,
       required:false,
     },

@@ -1,30 +1,25 @@
-const Sequelize=require('sequelize')
-const sequelize=require('../database')
+const { default: mongoose } = require('mongoose');
+const Mongoose = require('../database')
+const ID= mongoose.Schema.Types.ObjectId
 
-const Like = sequelize.define("Likes",{
-    likeid: {
-        type:Sequelize.UUID,
-        allowNull: false,
-        defaultValue: Sequelize.UUIDV4,
-        primaryKey: true,
-    },
+const likeSchema = new Mongoose.Schema(
+  {
     postid: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      type:ID,
+      required:true,
+        trim:true,
     },
     likerid: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      type:ID,
+      required:true,
+        trim:true,
     }
-})
+  },
+  {
+    timestamps:true
+  }
+)
 
-sequelize
-  .sync()
-  .then(() => {
-    console.log("Table created successfully!");
-  })
-  .catch((error) => {
-    console.error("Unable to create table : ", error);
-  });
+const Like = Mongoose.model("Like", likeSchema);
 
-  module.exports = Like;
+module.exports = Like;
