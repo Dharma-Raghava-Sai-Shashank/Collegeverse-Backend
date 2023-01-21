@@ -35,7 +35,7 @@ app.post('/signin',async(req,res)=>{
     if(!data)
         return ({success:"false",token:"",message:"Email does not exists"})
     else if(data.password==password) 
-        return ({success:"true",token:data._id,message:"Signin succeccfull"})
+        return c({success:"true",token:data._id,message:"Signin succeccfull"})
     return ({success:"false",token:"",message:"Wrong Password"})
 })
 
