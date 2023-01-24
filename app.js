@@ -14,7 +14,7 @@ app.get('/',async(req,res)=>{
 
 app.get('/about',async(req,res)=>{
     var data=await User.find({})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/signup',async(req,res)=>{
@@ -24,19 +24,19 @@ app.post('/signup',async(req,res)=>{
     if(!data)
     {
         var u=await user.save()
-        return ({success:"true",token:u._id,message:"Signup successfull"})
+        return res.json({success:"true",token:u._id,message:"Signup successfull"})
     }
-    return ({success:"false",token:"",message:"Email already exists"})
+    return res.json({success:"false",token:"",message:"Email already exists"})
 })
 
 app.post('/signin',async(req,res)=>{
     const {email,password}=req.body
     var data=await User.findOne({email:email})
     if(!data)
-        return ({success:"false",token:"",message:"Email does not exists"})
+        return res.json({success:"false",token:"",message:"Email does not exists"})
     else if(data.password==password) 
-        return ({success:"true",token:data._id,message:"Signin succeccfull"})
-    return ({success:"false",token:"",message:"Wrong Password"})
+        return res.json({success:"true",token:data._id,message:"Signin succeccfull"})
+    return res.json({success:"false",token:"",message:"Wrong Password"})
 })
 
 app.post('/addpost',async(req,res)=>{
@@ -44,15 +44,15 @@ app.post('/addpost',async(req,res)=>{
     const post = new Post({createrid,postname,postdetail,member,image,division})
     try {
         await post.save();
-        return res.send({success:"true",message:"Post succeccfull"})
+        return res.json({success:"true",message:"Post succeccfull"})
       } catch (error) {
-            return res.send({success:"false",message:"Post unsucceccfull"})
+            return res.json({success:"false",message:"Post unsucceccfull"})
       }
 })
 
 app.get('/getallpost',async(req,res)=>{
     var data=await Post.find({})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/addlike',async(req,res)=>{
@@ -60,9 +60,9 @@ app.post('/addlike',async(req,res)=>{
     const post = new Like({postid,likerid})
     try {
         await post.save();
-        return res.send({success:"true",message:"Like succeccfull"})
+        return res.json({success:"true",message:"Like succeccfull"})
       } catch (error) {
-            return res.send({success:"false",message:"Like unsucceccfull"})
+            return res.json({success:"false",message:"Like unsucceccfull"})
       }
 })
 
@@ -74,19 +74,19 @@ app.post('/getuserlike',async(req,res)=>{
     {
         post+=await Post.findOne({postid:dat.postid})
     }
-    return res.send(post)
+    return res.json(post)
 })
 
 app.post('/getuserpost',async(req,res)=>{
     const {_id}=req.body
     var data=await Post.find({createrid:_id})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/profile',async(req,res)=>{
     const {_id}=req.body
     var data=await User.findOne({_id:_id})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/request',async(req,res)=>{
@@ -94,22 +94,22 @@ app.post('/request',async(req,res)=>{
     const connection = new Connection({postid,fromid,toid,comment,1:Number})
     try {
         await connection.save();
-        return res.send({success:"true",message:"Request succeccfull"})
+        return res.json({success:"true",message:"Request succeccfull"})
       } catch (error) {
-            return res.send({success:"false",message:"Request unsucceccfull"})
+            return res.json({success:"false",message:"Request unsucceccfull"})
       }
 })
 
 app.post('/getuserpostrequest',async(req,res)=>{
     const {postid}=req.body
     var data=await Connection.find({postid:postid,status:0})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/getuserpostaccept',async(req,res)=>{
     const {postid}=req.body
     var data=await Connection.find({postid:postid,status:1})
-    return res.send(data)
+    return res.json(data)
 })
 
 app.post('/accept',async(req,res)=>{
@@ -117,9 +117,9 @@ app.post('/accept',async(req,res)=>{
     const connection = new Connection({postid,_id,toid,comment,1:Number})
     try {
         await connection.save();
-        return res.send({success:"true",message:"Accept succeccfull"})
+        return res.json({success:"true",message:"Accept succeccfull"})
       } catch (error) {
-            return res.send({success:"false",message:"Accept unsucceccfull"})
+            return res.json({success:"false",message:"Accept unsucceccfull"})
       }
 })
 
