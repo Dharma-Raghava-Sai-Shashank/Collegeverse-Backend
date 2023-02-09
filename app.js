@@ -1,5 +1,6 @@
 const express = require('express')
 const UserRoute=require('./routes/userRoute')
+const User=require('./entity/users')
 const Post=require('./entity/posts')
 const Like=require('./entity/likes')
 const Connection=require('./entity/connections')

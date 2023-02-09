@@ -31,7 +31,7 @@ const userSchema = new Mongoose.Schema(
     },
     otp:{
       type:String,
-      default:"0000"
+      default:"000000"
     },
     otptime:{
       type:Date,
