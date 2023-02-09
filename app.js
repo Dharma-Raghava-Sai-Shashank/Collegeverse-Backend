@@ -1,12 +1,14 @@
 const express = require('express')
-const User=require('./entity/users')
+const UserRoute=require('./routes/userRoute')
 const Post=require('./entity/posts')
 const Like=require('./entity/likes')
 const Connection=require('./entity/connections')
 
 const app = express()
 app.use(express.urlencoded({extended:false}))
-app.use(express.json());
+app.use(express.json())
+
+app.use('/user',UserRoute)
 
 app.get('/',async(req,res)=>{
     return res.send("Server Started")
@@ -17,27 +19,6 @@ app.get('/about',async(req,res)=>{
     return res.json(data)
 })
 
-app.post('/signup',async(req,res)=>{
-    const {name,email,password}=req.body;
-    const user = new User({name, email, password});
-    var data=await User.findOne({email:email})
-    if(!data)
-    {
-        var u=await user.save()
-        return res.json({success:"true",token:u._id,message:"Signup successfull"})
-    }
-    return res.json({success:"false",token:"",message:"Email already exists"})
-})
-
-app.post('/signin',async(req,res)=>{
-    const {email,password}=req.body
-    var data=await User.findOne({email:email})
-    if(!data)
-        return res.json({success:"false",token:"",message:"Email does not exists"})
-    else if(data.password==password) 
-        return res.json({success:"true",token:data._id,message:"Signin succeccfull"})
-    return res.json({success:"false",token:"",message:"Wrong Password"})
-})
 
 app.post('/addpost',async(req,res)=>{
     const {createrid,postname,postdetail,member,image,division}=req.body

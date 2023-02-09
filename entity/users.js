@@ -28,6 +28,14 @@ const userSchema = new Mongoose.Schema(
     image: {
       type: String,
       required:false,
+    },
+    otp:{
+      type:String,
+      default:"0000"
+    },
+    otptime:{
+      type:Date,
+      default:Date.now()
     }
   },
   {
