@@ -20,6 +20,10 @@ const postSchema = new Mongoose.Schema(
     image: {
       type: String,
       required:false,
+    },
+    is_post:{
+      type:Number,
+      required:false,
     }
   },
   {

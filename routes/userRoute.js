@@ -3,7 +3,6 @@ const router=express.Router()
 
 const User=require('../entity/users')
 const nodemailer = require('nodemailer')
-const e = require('express')
 
 router.post('/signup',async(req,res)=>{
     const {name,email,password}=req.body;
@@ -100,6 +99,11 @@ router.post('/resetPassword',async(req,res)=>{
     const {email,password}=req.body
     var data=await User.updateOne({email:email},{$set:{password:password}})
     return res.json({success:"true",token:email,message:"Password Reset Successfull"})
+})
+
+router.get('/get/:id',async(req,res)=>{
+    var data=await User.findOne({_id:req.params.id})
+    return res.json(data)
 })
 
 module.exports=router

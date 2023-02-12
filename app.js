@@ -1,5 +1,6 @@
 const express = require('express')
 const UserRoute=require('./routes/userRoute')
+const PostRoute=require('./routes/postRoute')
 const User=require('./entity/users')
 const Post=require('./entity/posts')
 const Like=require('./entity/likes')
@@ -10,6 +11,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 app.use('/user',UserRoute)
+app.use('/post',PostRoute)
 
 app.get('/',async(req,res)=>{
     return res.send("Server Started")
