@@ -28,7 +28,7 @@ router.get('/get/:id',async(req,res)=>{
 router.post('/update',async(req,res)=>{
     const {_id,createrid,postname,postdetail,image,is_post}=req.body;
     var data=await Post.updateOne({_id:_id},{$set:{postname:postname,postdetail:postdetail,image:image,is_post:is_post}})
-    return res.json({success:"true",token:data._id,message:"Update Successfully"})
+    return res.json({success:"true",token:data._id,message:"Update Successfull"})
 })
 
 module.exports=router
