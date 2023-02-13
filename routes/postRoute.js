@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { Mongoose } = require('mongoose');
 const router=express.Router()
 
 const Post=require('../entity/posts')

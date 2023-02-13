@@ -5,7 +5,7 @@ const ID= mongoose.Schema.Types.ObjectId
 const postSchema = new Mongoose.Schema(
   {
     createrid:{
-      type:ID,
+      type:String,
       required:true,
         trim:true,
     },
