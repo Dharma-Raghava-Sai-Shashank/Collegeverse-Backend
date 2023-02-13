@@ -5,9 +5,17 @@ const ID= mongoose.Schema.Types.ObjectId
 const postSchema = new Mongoose.Schema(
   {
     createrid:{
-      type:String,
+      type:ID,
       required:true,
         trim:true,
+    },
+    creatername:{
+      type: String,
+      required:false,
+    },
+    createrimage:{
+      type: String,
+      required:false,
     },
     postname: {
       type: String,

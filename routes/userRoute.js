@@ -1,5 +1,7 @@
 const express = require('express')
 const router=express.Router()
+const {ObjectId} = require('mongoose');
+
 
 const User=require('../entity/users')
 const nodemailer = require('nodemailer')
@@ -102,7 +104,7 @@ router.post('/resetPassword',async(req,res)=>{
 })
 
 router.get('/get/:id',async(req,res)=>{
-    var data=await User.findOne({_id:req.params.id})
+    var data=await User.findOne({_id:Mongoose.Schema.Types.ObjectId(req.params.id)})
     return res.json(data)
 })
 
