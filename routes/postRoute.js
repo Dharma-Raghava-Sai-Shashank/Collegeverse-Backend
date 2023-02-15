@@ -11,6 +11,7 @@ router.post('/post',async(req,res)=>{
     var user=await User.findOne({_id:createrid})
     var creatername=user.name
     var createrimage=user.image
+    console.log(a,b)
     const post = new Post({createrid,creatername,createrimage,postname,postdetail,image,is_post})
     var p=await post.save()
     return res.json({success:"true",token:p._id,message:"Posted Successfully"})
@@ -62,9 +63,9 @@ router.post('/unlike',async(req,res)=>{
 router.get('/like/getall/:id',async(req,res)=>{
     var data=await Like.find({likerid:req.params.id})
     var post=Array()
-    for(var dat in data)
+    for(let i=0;i<data.length;i++)
     {
-        post.push(await Post.findOne({postid:dat.postid}))
+        post.push(await Post.findOne({_id:data[i].postid}))
     }
     return res.json(post)
 })
