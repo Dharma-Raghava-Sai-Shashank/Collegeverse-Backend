@@ -7,12 +7,11 @@ const User = require('../entity/users');
 
 
 router.post('/post',async(req,res)=>{
-    const {_id,createrid,creatername,createrimage,postname,postdetail,image,is_post}=req.body;
+    const {_id,createrid,postname,postdetail,image,is_post}=req.body;
     var user=await User.findOne({_id:createrid})
-    var a=user.name
-    var b=user.image
-    console.log(a,b)
-    const post = new Post({createrid,a,b,postname,postdetail,image,is_post})
+    var creatername=user.name
+    var createrimage=user.image
+    const post = new Post({createrid,creatername,createrimage,postname,postdetail,image,is_post})
     var p=await post.save()
     return res.json({success:"true",token:p._id,message:"Posted Successfully"})
 })
