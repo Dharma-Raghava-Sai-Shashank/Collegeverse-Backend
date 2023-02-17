@@ -7,6 +7,9 @@ const Connection=require('../entity/connections');
 
 router.post('/connect',async(req,res)=>{
     const {fromid,toid}=req.body
+    var a = await Connection.findOne({fromid:fromid,toid:toid})
+    if(a!=null)
+        return res.json({success:"false",token:"",message:"Database Error"})
     const connection = new Connection({fromid,toid})
     try {
         var c=await connection.save();
