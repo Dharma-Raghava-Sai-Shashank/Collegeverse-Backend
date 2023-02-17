@@ -9,7 +9,7 @@ router.post('/connect',async(req,res)=>{
     const {fromid,toid}=req.body
     const connection = new Connection({fromid,toid})
     try {
-        var c=await Connection.save();
+        var c=await connection.save();
         return res.json({success:"true",token:c._id,message:"Connected"})
       } catch (error) {
         console.log(error)
