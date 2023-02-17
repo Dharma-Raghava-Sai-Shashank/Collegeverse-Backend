@@ -4,11 +4,6 @@ const ID= mongoose.Schema.Types.ObjectId
 
 const connectionSchema = new Mongoose.Schema(
   {
-    postid: {
-      type:ID,
-      required:true,
-        trim:true,
-    },
     fromid: {
       type:ID,
       required:true,
@@ -18,14 +13,6 @@ const connectionSchema = new Mongoose.Schema(
       type:ID,
       required:true,
         trim:true,
-    },
-    comment:{
-      type: String,
-      required:false,
-    },
-    status: {
-      type: Number,
-      allowNull: true,
     }
   },
   {

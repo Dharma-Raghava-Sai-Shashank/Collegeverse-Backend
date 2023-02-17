@@ -1,9 +1,9 @@
 const express = require('express')
 const UserRoute=require('./routes/userRoute')
 const PostRoute=require('./routes/postRoute')
+const LikeRoute=require('./routes/likeRoute')
+const ConnectionRoute=require('./routes/connectionRoute')
 const User=require('./entity/users')
-const Post=require('./entity/posts')
-const Like=require('./entity/likes')
 const Connection=require('./entity/connections')
 
 const app = express()
@@ -12,6 +12,10 @@ app.use(express.json())
 
 app.use('/user',UserRoute)
 app.use('/post',PostRoute)
+app.use('/like',LikeRoute)
+app.use('/connection',ConnectionRoute)
+
+
 
 app.get('/',async(req,res)=>{
     return res.send("Server Started")
