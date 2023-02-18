@@ -3,6 +3,8 @@ const UserRoute=require('./routes/userRoute')
 const PostRoute=require('./routes/postRoute')
 const LikeRoute=require('./routes/likeRoute')
 const ConnectionRoute=require('./routes/connectionRoute')
+const CommentRoute=require('./routes/commentRoute')
+
 const User=require('./entity/users')
 const Connection=require('./entity/connections')
 
@@ -14,6 +16,7 @@ app.use('/user',UserRoute)
 app.use('/post',PostRoute)
 app.use('/like',LikeRoute)
 app.use('/connection',ConnectionRoute)
+app.use('/comment',CommentRoute)
 
 
 
