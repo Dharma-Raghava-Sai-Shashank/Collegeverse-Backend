@@ -112,7 +112,7 @@ router.post('/update',async(req,res)=>{
     const {_id,name,email,phone,about,image}=req.body
     try{
         var user=await User.updateOne({_id:_id},{$set:{name:name,email:email,phone:phone,about:about,image:image}})
-        return res.json({success:"true",token:user._id,message:"Update Successfull"})
+        return res.json({success:"true",token:"",message:"Update Successfull"})
     }
     catch(e){
         return res.json({success:"false",token:"",message:"Update Unsuccessfull"})
