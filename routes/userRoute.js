@@ -114,7 +114,7 @@ router.post('/update',async(req,res)=>{
         var user=await User.updateOne({_id:_id},{$set:{name:name,email:email,phone:phone,about:about,image:image}})
         return res.json({success:"true",token:"",message:"Update Successfull"})
     }
-    catch(e){
+    catch(error){
         return res.json({success:"false",token:"",message:"Update Unsuccessfull"})
     }
 })
