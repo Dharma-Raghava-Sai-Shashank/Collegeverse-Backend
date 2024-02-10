@@ -6,4 +6,4 @@ npm run dev
 
 mongodb: 
 mongodb+srv://saishashank:<password>@cluster0.lemlj6u.mongodb.net/?retryWrites=true&w=majority
-nmp i mongoose
+npm i mongoose

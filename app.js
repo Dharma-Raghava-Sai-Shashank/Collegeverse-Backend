@@ -1,4 +1,6 @@
 const express = require('express')
+const cors = require("cors");
+
 const UserRoute=require('./routes/userRoute')
 const PostRoute=require('./routes/postRoute')
 const LikeRoute=require('./routes/likeRoute')
@@ -11,15 +13,21 @@ const Connection=require('./entity/connections')
 const app = express()
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
+app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+      methods: ["GET", "PUT", "POST", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+      credentials: true,
+    })
+  );
 
 app.use('/user',UserRoute)
 app.use('/post',PostRoute)
 app.use('/like',LikeRoute)
 app.use('/connection',ConnectionRoute)
 app.use('/comment',CommentRoute)
-
-
-
+ 
 app.get('/',async(req,res)=>{
     return res.send("Server Started")
 })

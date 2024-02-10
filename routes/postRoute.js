@@ -5,7 +5,6 @@ const Post=require('../entity/posts')
 const Like=require('../entity/likes');
 const User = require('../entity/users');
 
-
 router.post('/post',async(req,res)=>{
     const {_id,createrid,postname,postdetail,image,is_post}=req.body;
     var user=await User.findOne({_id:createrid})
